@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Technology Level II</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #211954;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffff01;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e1e1e1;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #211954;
+        }
+
+        /* Back button styles */
+        .back-button {
+            position: absolute;
+            top: 5rem; /* Position below header */
+            left: 1rem;
+            background-color: #211954;
+            color: white;
+            border: 2px solid #ffff01;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        .back-button:hover {
+            background-color: #ffff01;
+            color: #211954;
+        }
+
+        .back-button i {
+            margin-right: 0.5rem;
+        }
+
+        /* Course header */
+        .course-hero {
+            background-color: #e8af30;
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        .course-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .course-layout {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* Course menu */
+        .course-menu {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .instructor-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .instructor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0c365a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .instructor-details h3 {
+            color: #0c365a;
+            margin-bottom: 0.2rem;
+        }
+
+        .instructor-details p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #0c365a;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .button:hover {
+            background-color: #0a2846;
+        }
+
+        .button-secondary {
+            background-color: #e8af30;
+        }
+
+        .button-secondary:hover {
+            background-color: #d49e1f;
+        }
+
+        .menu-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-section h3 {
+            color: #0c365a;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-links {
+            list-style: none;
+        }
+
+        .menu-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .menu-links li a {
+            text-decoration: none;
+            color: #555;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .menu-links li a:hover {
+            color: #e8af30;
+        }
+
+        .menu-icon {
+            margin-right: 0.8rem;
+            display: inline-block;
+            width: 1.5rem;
+            text-align: center;
+        }
+
+        /* Course content */
+        .course-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .content-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .content-card h2 {
+            color: #0c365a;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .progress-overview {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-stat {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin: 0 0.5rem;
+        }
+
+        .progress-stat:first-child {
+            margin-left: 0;
+        }
+
+        .progress-stat:last-child {
+            margin-right: 0;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e8af30;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Module styles */
+        .module {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .module-header {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-title {
+            font-weight: 600;
+            color: #0c365a;
+            display: flex;
+            align-items: center;
+        }
+
+        .module-icon {
+            background-color: #e8af30;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .module-status {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .module-content {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .resource-list {
+            list-style: none;
+        }
+
+        .resource-item {
+            padding: 0.8rem;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+
+        .resource-icon {
+            margin-right: 0.8rem;
+            color: #777;
+            font-size: 1.2rem;
+        }
+
+        .resource-details {
+            flex: 1;
+        }
+
+        .resource-title {
+            font-weight: 500;
+            color: #333;
+            display: block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .resource-title:hover {
+            color: #e8af30;
+        }
+
+        .resource-meta {
+            display: flex;
+            color: #777;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        .resource-status {
+            color: #e8af30;
+            margin-left: 10px;
+        }
+
+        .resource-status.incomplete {
+            color: #e74c3c;
+        }
+
+        /* Announcement styles */
+        .announcement {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .announcement:last-child {
+            border-bottom: none;
+        }
+
+        .announcement-title {
+            font-weight: 600;
+            color: #4a90e2;
+            margin-bottom: 0.3rem;
+        }
+
+        .announcement-meta {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .announcement-content {
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0c365a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: #e1e1e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Add styles for clickable modules */
+        .resource-title.clickable {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .resource-title.clickable:after {
+            content: '→';
+            display: inline-block;
+            margin-left: 5px;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .resource-title.clickable:hover:after {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        /* Loading indicator */
+        .loading-indicator {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .course-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-section {
+                margin-bottom: 1rem;
+            }
+
+            .progress-overview {
+                flex-wrap: wrap;
+            }
+
+            .progress-stat {
+                flex-basis: 45%;
+                margin: 0.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .back-button {
+                top: 4rem; /* Adjust for mobile header height */
+                left: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <a href="javascript:history.back()" class="back-button" title="Go back">←</a>
+
+    <!-- Loading indicator -->
+    <div class="loading-indicator" id="loadingIndicator">Loading module content...</div>
+
+    <!-- Header with navigation -->
+    <header>
+        <div style="display: flex; align-items: center;">
+            <a href="learningsite.html" style="text-decoration: none; color: white;">
+                <div class="logo">Felta<span> TechVoc Academy</span></div>
+            </a>
+        </div>
+        <div class="user-menu">
+            <div class="user-avatar">KF</div>
+        </div>
+    </header>
+
+    <!-- Course hero section -->
+    <div class="course-hero">
+        <h1>Robotics Technology Level II</h1>
+        <p>RTL-102 • Spring 2025</p>
+    </div>
+
+    <!-- Main content area -->
+    <div class="container">
+        <div class="course-layout">
+            <!-- Course menu sidebar -->
+            <aside class="course-menu">
+                <div class="instructor-info">
+                    <div class="instructor-avatar">AA</div>
+                    <div class="instructor-details">
+                        <h3>Prof. Annalyn Aban</h3>
+                        <p>annalynaban@yahoo.com</p>
+                        <p>Office Hours: TTh 3:00-4:30 PM</p>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <a href="#" class="button button-secondary" style="width: 100%; text-align: center;" id="startNextLesson">Start Next Lesson</a>
+                </div>
+
+                <div class="menu-section">
+                    <h3>Course Navigation</h3>
+                    <ul class="menu-links">
+                        <li>
+                            <a href="rtl2-announcements.html">
+                                <span class="menu-icon">📢</span>
+                                Announcements
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-assignments.html">
+                                <span class="menu-icon">📝</span>
+                                Assignments
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-grades.html">
+                                <span class="menu-icon">📊</span>
+                                Grades
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-discussions.html">
+                                <span class="menu-icon">💬</span>
+                                Discussions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-people.html">
+                                <span class="menu-icon">👥</span>
+                                People
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-syllabus.html">
+                                <span class="menu-icon">📌</span>
+                                Syllabus
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Course content main area -->
+            <main class="course-content">
+                <!-- Course progress overview -->
+                <section class="content-card">
+                    <h2>Course Progress</h2>
+                    <div class="progress-overview">
+                        <div class="progress-stat">
+                            <div class="stat-value">60%</div>
+                            <div class="stat-label">Overall Progress</div>
+                        </div>
+                        <div class="progress-stat">
+                            <div class="stat-value">85%</div>
+                            <div class="stat-label">Basic Competencies</div>
+                        </div>
+                        <div class="progress-stat">
+                            <div class="stat-value">75%</div>
+                            <div class="stat-label">Common Competencies</div>
+                        </div>
+                        <div class="progress-stat">
+                            <div class="stat-value">45%</div>
+                            <div class="stat-label">Core Competencies</div>
+                        </div>
+                        <div class="progress-stat">
+                            <div class="stat-value">20%</div>
+                            <div class="stat-label">Supervised Industry Learning</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Course modules/content -->
+                <section class="content-card">
+                    <h2>Course Modules</h2>
+                    
+                    <!-- Module 1: Basic Competencies -->
+                    <div class="module">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <div class="module-icon">1</div>
+                                Basic Competencies
+                            </div>
+                            <div class="module-status">85% Complete</div>
+                        </div>
+                        <div class="module-content">
+                            <ul class="resource-list">
+                                <li class="resource-item">
+                                    <span class="resource-icon">📄</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="module1-1">Obtain & Convey Workplace Information</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Course Module</span>
+                                            <span class="resource-status">Completed</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">📄</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="team-environment">Perform Workplace Duties Following Written Notices</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Course Module</span>
+                                            <span class="resource-status">Completed</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">📄</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="module1-3">Complete Relevant Work-Related Documents</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Course Module</span>
+                                            <span class="resource-status">Completed (92%)</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Module 2: Common Competencies -->
+                    <div class="module">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <div class="module-icon">2</div>
+                                Common Competencies
+                            </div>
+                            <div class="module-status">75% Complete</div>
+                        </div>
+                        <div class="module-content">
+                            <ul class="resource-list">
+                                <li class="resource-item">
+                                    <span class="resource-icon">📄</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="module1-1">Participate in Workplace Communication</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Course Module</span>
+                                            <span class="resource-status">Completed</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">📄</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="team-environment">Work in a Team Environment</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Course Module</span>
+                                            <span class="resource-status">Completed</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">📄</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="module1-3">Practice Occupational Health and Safety Procedures</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Course Module</span>
+                                            <span class="resource-status">Completed (92%)</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">📄</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="problem-solving">Apply Problem-Solving Techniques in the Workplace</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Course Module</span>
+                                            <span class="resource-status">Completed</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">📄</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="work-ethics">Develop Professional Work Ethics and Competence</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Course Module</span>
+                                            <span class="resource-status">Completed</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Module 3: Core Competencies -->
+                    <div class="module">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <div class="module-icon">3</div>
+                                Core Competencies
+                            </div>
+                            <div class="module-status">45% Complete</div>
+                        </div>
+                        <div class="module-content">
+                            <ul class="resource-list">
+                                <li class="resource-item">
+                                    <span class="resource-icon">📄</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="robotic-kinematics">Robotic Kinematics and Dynamics</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Reading • 45 min</span>
+                                            <span class="resource-status">Completed</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">🎬</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="motion-planning">Robotic Arm Motion Planning</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Video • 35 min</span>
+                                            <span class="resource-status">Completed</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">📊</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="sensor-integration">Robot Sensor Integration</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Interactive Exercise</span>
+                                            <span class="resource-status">In Progress</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">📝</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="arm-kinematics-project">Robot Arm Kinematics Project</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Project</span>
+                                            <span class="resource-status incomplete">Due in 2 days</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">✅</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="midterm-exam">Core Competencies Midterm Exam</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Exam</span>
+                                            <span class="resource-status incomplete">Not Started</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Module 4: Supervised Industry Learning -->
+                    <div class="module">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <div class="module-icon">4</div>
+                                Supervised Industry Learning
+                            </div>
+                            <div class="module-status">20% Complete</div>
+                        </div>
+                        <div class="module-content">
+                            <ul class="resource-list">
+                                <li class="resource-item">
+                                    <span class="resource-icon">📄</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="industry-guidelines">Industry Partnership Guidelines</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Reading • 20 min</span>
+                                            <span class="resource-status">Completed</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">🎬</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="case-studies">Industry Case Studies</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Video Series • 3 parts</span>
+                                            <span class="resource-status">Completed</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">📝</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="partner-matching">Industry Partner Matching Form</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Form</span>
+                                            <span class="resource-status incomplete">Not Submitted</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">📅</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="learning-log">Industry Learning Log Template</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Assignment</span>
+                                            <span class="resource-status incomplete">Not Started</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="resource-item">
+                                    <span class="resource-icon">📊</span>
+                                    <div class="resource-details">
+                                        <a class="resource-title clickable" data-module-id="industry-project">Final Industry Project</a>
+                                        <div class="resource-meta">
+                                            <span class="resource-type">Project</span>
+                                            <span class="resource-status incomplete">Not Started</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Felta TechVoc Academy Learning Management System</p>
+        <ul class="footer-links">
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Contact Support</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make module headers expandable/collapsible
+            const moduleHeaders = document.querySelectorAll('.module-header');
+            moduleHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                });
+            });
+
+            // Get all clickable module titles
+            const moduleTitles = document.querySelectorAll('.resource-title.clickable');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            // Add click event to each module title
+            moduleTitles.forEach(title => {
+                title.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const moduleId = this.getAttribute('data-module-id');
+                    const moduleName = this.textContent;
+                    
+                    // Show loading indicator
+                    loadingIndicator.style.display = 'block';
+                    
+                    // Simulate loading time (you would replace this with actual navigation)
+                    setTimeout(() => {
+                        // Navigate to the module page
+                        window.location.href = `module-pages/${moduleId}.html`;
+                    }, 500);
+                });
+            });
+
+            // Also make the "Start Next Lesson" button functional
+            document.getElementById('startNextLesson').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Show loading indicator
+                loadingIndicator.style.display = 'block';
+                
+                // Determine the next incomplete lesson (here we're just going to the first one for demo)
+                setTimeout(() => {
+                    window.location.href = 'module-pages/sensor-integration.html';
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

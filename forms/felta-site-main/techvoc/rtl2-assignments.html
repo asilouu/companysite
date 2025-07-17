@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments - Robotics Technology Level II</title>
+    <style>
+        /* Copy all base styles from rtl2-announcements.html */
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #211954;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffff01;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #211954;
+        }
+
+        /* Back button styles */
+        .back-button {
+            position: absolute;
+            top: 5rem;
+            left: 1rem;
+            background-color: #211954;
+            color: white;
+            border: 2px solid #ffff01;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        .back-button:hover {
+            background-color: #ffff01;
+            color: #211954;
+        }
+
+        /* Course header */
+        .course-hero {
+            background-color: #e8af30;
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        .course-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .course-layout {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* Course menu */
+        .course-menu {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .instructor-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .instructor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0c365a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .instructor-details h3 {
+            color: #0c365a;
+            margin-bottom: 0.2rem;
+        }
+
+        .instructor-details p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .menu-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-section h3 {
+            color: #0c365a;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-links {
+            list-style: none;
+        }
+
+        .menu-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .menu-links li a {
+            text-decoration: none;
+            color: #555;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .menu-links li a:hover {
+            color: #e8af30;
+        }
+
+        .menu-icon {
+            margin-right: 0.8rem;
+            display: inline-block;
+            width: 1.5rem;
+            text-align: center;
+        }
+
+        /* Content card styles */
+        .content-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-card h2 {
+            color: #0c365a;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        /* Assignment styles */
+        .assignment {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .assignment:hover {
+            background-color: #f9f9f9;
+        }
+
+        .assignment:last-child {
+            border-bottom: none;
+        }
+
+        .assignment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .assignment-title {
+            font-weight: 600;
+            color: #e8af30;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .assignment-meta {
+            color: #777;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .assignment-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-due-soon {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-submitted {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-graded {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .assignment-description {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .assignment-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .assignment-button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .assignment-button.primary {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .assignment-button.primary:hover {
+            background-color: #27ae60;
+        }
+
+        .assignment-button.secondary {
+            background-color: #f0f0f0;
+            color: #555;
+        }
+
+        .assignment-button.secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .assignment-grade {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0c365a;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0c365a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: #e1e1e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .course-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .back-button {
+                top: 4rem;
+                left: 0.5rem;
+            }
+            
+            .assignment-header {
+                flex-direction: column;
+            }
+            
+            .assignment-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <a href="rtl2.html" class="back-button" title="Go back">←</a>
+
+    <!-- Header with navigation -->
+    <header>
+        <div style="display: flex; align-items: center;">
+            <a href="learningsite.html" style="text-decoration: none; color: white;">
+                <div class="logo">Felta<span> TechVoc Academy</span></div>
+            </a>
+        </div>
+        <div class="user-menu">
+            <div class="user-avatar">KF</div>
+        </div>
+    </header>
+
+    <!-- Course hero section -->
+    <div class="course-hero">
+        <h1>Assignments</h1>
+        <p>Robotics Technology Level II • RTL-102</p>
+    </div>
+
+    <!-- Main content area -->
+    <div class="container">
+        <div class="course-layout">
+            <!-- Course menu sidebar -->
+            <aside class="course-menu">
+                <div class="instructor-info">
+                    <div class="instructor-avatar">AA</div>
+                    <div class="instructor-details">
+                        <h3>Prof. Annalyn Aban</h3>
+                        <p>annalynaban@yahoo.com</p>
+                        <p>Office Hours: TTh 3:00-4:30 PM</p>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <h3>Course Navigation</h3>
+                    <ul class="menu-links">
+                        <li>
+                            <a href="rtl2-announcements.html">
+                                <span class="menu-icon">📢</span>
+                                Announcements
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-assignments.html" class="active">
+                                <span class="menu-icon">📝</span>
+                                Assignments
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-grades.html">
+                                <span class="menu-icon">📊</span>
+                                Grades
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-discussions.html">
+                                <span class="menu-icon">💬</span>
+                                Discussions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-people.html">
+                                <span class="menu-icon">👥</span>
+                                People
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-syllabus.html">
+                                <span class="menu-icon">📌</span>
+                                Syllabus
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Assignments content -->
+            <main class="course-content">
+                <section class="content-card">
+                    <h2>Course Assignments</h2>
+                    
+                    <div class="assignment">
+                        <div class="assignment-header">
+                            <div>
+                                <h3 class="assignment-title">Robot Arm Kinematics Project</h3>
+                                <div class="assignment-meta">
+                                    <span>Due: March 12, 2025</span>
+                                    <span>Points: 100</span>
+                                    <span>Type: Project</span>
+                                </div>
+                            </div>
+                            <span class="assignment-status status-due-soon">Due in 2 days</span>
+                        </div>
+                        <div class="assignment-description">
+                            <p>Design and implement a robot arm kinematics system that can perform pick-and-place operations. The project should demonstrate understanding of forward and inverse kinematics, as well as proper error handling and safety protocols.</p>
+                            <p>Required deliverables:</p>
+                            <ul>
+                                <li>Complete project report (PDF format)</li>
+                                <li>Source code files (.py or .cpp)</li>
+                                <li>Documentation of testing procedures</li>
+                                <li>Video demonstration (max 5 minutes)</li>
+                            </ul>
+                        </div>
+                        <div class="assignment-actions">
+                            <button class="assignment-button primary">Submit Assignment</button>
+                            <button class="assignment-button secondary">View Rubric</button>
+                        </div>
+                    </div>
+
+                    <div class="assignment">
+                        <div class="assignment-header">
+                            <div>
+                                <h3 class="assignment-title">Core Competencies Midterm Exam</h3>
+                                <div class="assignment-meta">
+                                    <span>Due: March 25, 2025</span>
+                                    <span>Points: 150</span>
+                                    <span>Type: Exam</span>
+                                </div>
+                            </div>
+                            <span class="assignment-status status-due-soon">Due in 15 days</span>
+                        </div>
+                        <div class="assignment-description">
+                            <p>The midterm exam will cover all topics from Modules 1-3, including robot kinematics, programming fundamentals, and safety protocols.</p>
+                            <p>Exam format:</p>
+                            <ul>
+                                <li>Duration: 2 hours</li>
+                                <li>Format: Multiple Choice and Problem Solving</li>
+                                <li>Location: Main Computer Lab</li>
+                                <li>Required Materials: Calculator, Student ID</li>
+                            </ul>
+                        </div>
+                        <div class="assignment-actions">
+                            <button class="assignment-button primary">View Study Guide</button>
+                            <button class="assignment-button secondary">Practice Questions</button>
+                        </div>
+                    </div>
+
+                    <div class="assignment">
+                        <div class="assignment-header">
+                            <div>
+                                <h3 class="assignment-title">Lab Safety Certification</h3>
+                                <div class="assignment-meta">
+                                    <span>Due: March 1, 2025</span>
+                                    <span>Points: 50</span>
+                                    <span>Type: Quiz</span>
+                                </div>
+                            </div>
+                            <span class="assignment-status status-graded">
+                                <span class="assignment-grade">48/50</span>
+                            </span>
+                        </div>
+                        <div class="assignment-description">
+                            <p>Complete the lab safety certification quiz to demonstrate understanding of safety protocols and emergency procedures in the robotics laboratory.</p>
+                            <p>Topics covered:</p>
+                            <ul>
+                                <li>Emergency procedures</li>
+                                <li>Equipment safety guidelines</li>
+                                <li>Personal protective equipment</li>
+                                <li>Workspace organization</li>
+                            </ul>
+                        </div>
+                        <div class="assignment-actions">
+                            <button class="assignment-button primary">View Feedback</button>
+                            <button class="assignment-button secondary">Review Materials</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Felta TechVoc Academy Learning Management System</p>
+        <ul class="footer-links">
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Contact Support</a></li>
+        </ul>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox - Felta Learning Website</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #211954;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffff01;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #211954;
+        }
+
+        /* Back button styles */
+        .back-button {
+            position: absolute;
+            top: 5rem; /* Position below header */
+            left: 1rem;
+            background-color: #211954;
+            color: white;
+            border: 2px solid #ffff01;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        .back-button:hover {
+            background-color: #ffff01;
+            color: #211954;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .inbox-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .inbox-sidebar {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-right: 1px solid #eee;
+        }
+
+        .compose-btn {
+            background-color: #211954;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            width: 100%;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .compose-btn:hover {
+            background-color: #1a1542;
+        }
+
+        .folder-list {
+            list-style: none;
+        }
+
+        .folder-item {
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .folder-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .folder-item:hover {
+            background-color: #eef0f2;
+        }
+
+        .folder-item.active {
+            background-color: #211954;
+            color: white;
+        }
+
+        .folder-count {
+            margin-left: auto;
+            background-color: #eef0f2;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .folder-item.active .folder-count {
+            background-color: #ffff01;
+            color: #211954;
+        }
+
+        /* Email list */
+        .email-list {
+            padding: 1rem;
+        }
+
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-box {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            width: 300px;
+            font-size: 0.9rem;
+        }
+
+        .email-filters {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .email-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .email-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .email-item.unread {
+            background-color: #f0f7ff;
+        }
+
+        .email-checkbox {
+            width: 20px;
+            height: 20px;
+        }
+
+        .email-sender {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .email-subject {
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .email-preview {
+            color: #888;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .email-meta {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .email-time {
+            margin-bottom: 0.3rem;
+        }
+
+        .email-attachment {
+            color: #211954;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #211954;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: #e1e1e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .inbox-container {
+                grid-template-columns: 1fr;
+            }
+
+            .inbox-sidebar {
+                display: none;
+            }
+
+            .email-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .email-filters {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .back-button {
+                top: 4rem; /* Adjust for mobile header height */
+                left: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <a href="javascript:history.back()" class="back-button" title="Go back">←</a>
+
+    <!-- Header with navigation -->
+    <header>
+        <div style="display: flex; align-items: center;">
+            <div class="logo">Felta<span> TechVoc Academy</span></div>
+        </div>
+        <div class="user-menu">
+            <div class="user-avatar">JS</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="inbox-container">
+            <!-- Sidebar -->
+            <aside class="inbox-sidebar">
+                <button class="compose-btn">Compose</button>
+                <ul class="folder-list">
+                    <li class="folder-item active">
+                        <i class="fas fa-inbox"></i> Inbox
+                        <span class="folder-count">12</span>
+                    </li>
+                    <li class="folder-item">
+                        <i class="fas fa-paper-plane"></i> Sent
+                        <span class="folder-count">8</span>
+                    </li>
+                    <li class="folder-item">
+                        <i class="fas fa-star"></i> Starred
+                        <span class="folder-count">3</span>
+                    </li>
+                    <li class="folder-item">
+                        <i class="fas fa-file-alt"></i> Drafts
+                        <span class="folder-count">2</span>
+                    </li>
+                    <li class="folder-item">
+                        <i class="fas fa-trash"></i> Trash
+                        <span class="folder-count">5</span>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Email List -->
+            <main class="email-list">
+                <div class="email-header">
+                    <input type="text" class="search-box" placeholder="Search emails...">
+                    <div class="email-filters">
+                        <button class="filter-btn">All</button>
+                        <button class="filter-btn">Unread</button>
+                        <button class="filter-btn">Starred</button>
+                        <button class="filter-btn">Important</button>
+                    </div>
+                </div>
+
+                <div class="email-item unread">
+                    <input type="checkbox" class="email-checkbox">
+                    <div class="email-content">
+                        <div class="email-sender">Dr. Smith</div>
+                        <div class="email-subject">Mobile Robotics Assignment Feedback</div>
+                        <div class="email-preview">Thank you for submitting your assignment. I've reviewed your work and have some feedback...</div>
+                    </div>
+                    <div class="email-meta">
+                        <div class="email-time">10:30 AM</div>
+                        <div class="email-attachment"><i class="fas fa-paperclip"></i></div>
+                    </div>
+                </div>
+
+                <div class="email-item">
+                    <input type="checkbox" class="email-checkbox">
+                    <div class="email-content">
+                        <div class="email-sender">Course Coordinator</div>
+                        <div class="email-subject">Upcoming Lab Session - Robotics Technology II</div>
+                        <div class="email-preview">Reminder: The next lab session will focus on sensor integration and calibration...</div>
+                    </div>
+                    <div class="email-meta">
+                        <div class="email-time">Yesterday</div>
+                    </div>
+                </div>
+
+                <div class="email-item">
+                    <input type="checkbox" class="email-checkbox">
+                    <div class="email-content">
+                        <div class="email-sender">System Notification</div>
+                        <div class="email-subject">New Course Material Available</div>
+                        <div class="email-preview">New lecture notes and resources have been uploaded for Mobile Robotics Module 3...</div>
+                    </div>
+                    <div class="email-meta">
+                        <div class="email-time">Mar 25</div>
+                        <div class="email-attachment"><i class="fas fa-paperclip"></i></div>
+                    </div>
+                </div>
+
+                <div class="email-item unread">
+                    <input type="checkbox" class="email-checkbox">
+                    <div class="email-content">
+                        <div class="email-sender">Prof. Johnson</div>
+                        <div class="email-subject">Project Proposal Review</div>
+                        <div class="email-preview">I've reviewed your project proposal for the autonomous navigation system. Let's discuss...</div>
+                    </div>
+                    <div class="email-meta">
+                        <div class="email-time">Mar 24</div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Felta Learning Management System</p>
+        <ul class="footer-links">
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Contact Support</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add folder selection functionality
+            const folderItems = document.querySelectorAll('.folder-item');
+            folderItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    folderItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Add email selection functionality
+            const emailCheckboxes = document.querySelectorAll('.email-checkbox');
+            emailCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function(e) {
+                    e.stopPropagation();
+                });
+            });
+
+            // Add email item click functionality
+            const emailItems = document.querySelectorAll('.email-item');
+            emailItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('email-checkbox')) {
+                        this.classList.toggle('unread');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

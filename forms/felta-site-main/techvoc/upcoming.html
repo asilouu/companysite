@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming - Felta Learning Website</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #211954;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffff01;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e1e1e1;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #211954;
+        }
+
+        /* Back button styles */
+        .back-button {
+            position: absolute;
+            top: 5rem; /* Position below header */
+            left: 1rem;
+            background-color: #211954;
+            color: white;
+            border: 2px solid #ffff01;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        .back-button:hover {
+            background-color: #ffff01;
+            color: #211954;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .upcoming-header {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .upcoming-header h1 {
+            color: #211954;
+            margin-bottom: 0.5rem;
+        }
+
+        .upcoming-header p {
+            color: #666;
+        }
+
+        /* Calendar section */
+        .calendar-section {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-title {
+            font-size: 1.4rem;
+            color: #211954;
+            font-weight: bold;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .calendar-nav button {
+            background: none;
+            border: none;
+            color: #211954;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            padding: 0.5rem;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-day:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.1);
+        }
+
+        .calendar-day.has-event {
+            background-color: #e8f4ff;
+            border-color: #cce5ff;
+            position: relative;
+        }
+
+        .calendar-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background-color: #211954;
+            border-radius: 50%;
+        }
+
+        .calendar-day.today {
+            background-color: #211954;
+            color: white;
+            font-weight: bold;
+        }
+
+        .calendar-day.today.has-event::after {
+            background-color: #ffff01;
+        }
+
+        .calendar-day-header {
+            font-weight: bold;
+            color: #666;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        /* Events section */
+        .events-section {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .events-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .events-title {
+            font-size: 1.4rem;
+            color: #211954;
+            font-weight: bold;
+        }
+
+        .event-list {
+            list-style: none;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .event-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .event-item.highlighted {
+            background-color: #e8f4ff;
+            border-left: 4px solid #211954;
+        }
+
+        .event-date {
+            min-width: 100px;
+            text-align: center;
+            padding: 0.5rem;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+
+        .event-date .day {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #211954;
+        }
+
+        .event-date .month {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .event-content {
+            flex: 1;
+        }
+
+        .event-title {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+
+        .event-details {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .event-time {
+            font-size: 0.9rem;
+            color: #e74c3c;
+            margin-left: 1rem;
+            white-space: nowrap;
+        }
+
+        .event-type {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+        }
+
+        .type-assignment {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .type-exam {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .type-lab {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #211954;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: #e1e1e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .calendar-grid {
+                gap: 0.25rem;
+            }
+
+            .calendar-day {
+                font-size: 0.8rem;
+            }
+
+            .event-item {
+                flex-direction: column;
+            }
+
+            .event-date {
+                margin-bottom: 0.5rem;
+            }
+
+            .event-time {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+
+            .event-type {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                display: inline-block;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .back-button {
+                top: 4rem; /* Adjust for mobile header height */
+                left: 0.5rem;
+            }
+        }
+
+        .calendar-nav button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-nav button:hover {
+            background-color: #211954;
+            color: white;
+            border-color: #211954;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <a href="javascript:history.back()" class="back-button" title="Go back">←</a>
+
+    <!-- Header with navigation -->
+    <header>
+        <div style="display: flex; align-items: center;">
+            <div class="logo">Felta<span> TechVoc Academy</span></div>
+        </div>
+        <div class="user-menu">
+            <a href="#" class="button">Help</a>
+            <div class="user-avatar">JS</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="upcoming-header">
+            <h1>Upcoming Events</h1>
+            <p>View your upcoming assignments, exams, and important dates</p>
+        </div>
+
+        <!-- Calendar Section -->
+        <section class="calendar-section">
+            <div class="calendar-header">
+                <h2 class="calendar-title">March 2024</h2>
+                <div class="calendar-nav">
+                    <button>&lt;</button>
+                    <button>&gt;</button>
+                </div>
+            </div>
+            <div class="calendar-grid">
+                <div class="calendar-day-header">Sun</div>
+                <div class="calendar-day-header">Mon</div>
+                <div class="calendar-day-header">Tue</div>
+                <div class="calendar-day-header">Wed</div>
+                <div class="calendar-day-header">Thu</div>
+                <div class="calendar-day-header">Fri</div>
+                <div class="calendar-day-header">Sat</div>
+                
+                <!-- Calendar days -->
+                <div class="calendar-day">25</div>
+                <div class="calendar-day">26</div>
+                <div class="calendar-day has-event">27</div>
+                <div class="calendar-day has-event">28</div>
+                <div class="calendar-day">29</div>
+                <div class="calendar-day">1</div>
+                <div class="calendar-day">2</div>
+                <!-- Add more days as needed -->
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section class="events-section">
+            <div class="events-header">
+                <h2 class="events-title">Upcoming Events</h2>
+            </div>
+            <ul class="event-list">
+                <!-- Mobile Robotics Events -->
+                <li class="event-item">
+                    <div class="event-date">
+                        <div class="day">27</div>
+                        <div class="month">Mar</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">Introduction to Robotic Kinematics: Understanding Motion and Control</div>
+                        <div class="event-details">Mobile Robotics • Assignment Due</div>
+                    </div>
+                    <div class="event-time">11:59 PM</div>
+                    <div class="event-type type-assignment">Assignment</div>
+                </li>
+                <li class="event-item">
+                    <div class="event-date">
+                        <div class="day">28</div>
+                        <div class="month">Mar</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">Mobile Robot Navigation Systems Lab</div>
+                        <div class="event-details">Mobile Robotics • Lab Session</div>
+                    </div>
+                    <div class="event-time">10:00 AM - 12:00 PM</div>
+                    <div class="event-type type-lab">Lab</div>
+                </li>
+
+                <!-- Robotics Technology II Events -->
+                <li class="event-item">
+                    <div class="event-date">
+                        <div class="day">29</div>
+                        <div class="month">Mar</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">Advanced Sensor Integration for Autonomous Robotics</div>
+                        <div class="event-details">Robotics Technology II • Assignment Due</div>
+                    </div>
+                    <div class="event-time">11:59 PM</div>
+                    <div class="event-type type-assignment">Assignment</div>
+                </li>
+                <li class="event-item">
+                    <div class="event-date">
+                        <div class="day">2</div>
+                        <div class="month">Apr</div>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-title">Basic Competencies Assessment</div>
+                        <div class="event-details">Robotics Technology II • Practical Exam</div>
+                    </div>
+                    <div class="event-time">1:30 PM - 3:30 PM</div>
+                    <div class="event-type type-exam">Exam</div>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Felta Learning Management System</p>
+        <ul class="footer-links">
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Contact Support</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarTitle = document.querySelector('.calendar-title');
+            const prevButton = document.querySelector('.calendar-nav button:first-child');
+            const nextButton = document.querySelector('.calendar-nav button:last-child');
+            const calendarGrid = document.querySelector('.calendar-grid');
+            
+            let currentDate = new Date();
+            
+            function updateCalendar(date) {
+                const year = date.getFullYear();
+                const month = date.getMonth();
+                
+                // Update calendar title
+                calendarTitle.textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
+                
+                // Clear existing calendar days (except headers)
+                const dayHeaders = Array.from(calendarGrid.children).slice(0, 7);
+                calendarGrid.innerHTML = '';
+                dayHeaders.forEach(header => calendarGrid.appendChild(header));
+                
+                // Get first day of month and total days
+                const firstDay = new Date(year, month, 1);
+                const lastDay = new Date(year, month + 1, 0);
+                const totalDays = lastDay.getDate();
+                const startingDay = firstDay.getDay();
+                
+                // Add empty cells for days before the first day of the month
+                for (let i = 0; i < startingDay; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.className = 'calendar-day';
+                    calendarGrid.appendChild(emptyDay);
+                }
+                
+                // Add days of the month
+                for (let day = 1; day <= totalDays; day++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'calendar-day';
+                    dayElement.textContent = day;
+                    
+                    // Check if the day has events
+                    const currentDay = new Date(year, month, day);
+                    const hasEvent = checkForEvents(currentDay);
+                    if (hasEvent) {
+                        dayElement.classList.add('has-event');
+                    }
+                    
+                    // Highlight today
+                    if (isToday(currentDay)) {
+                        dayElement.classList.add('today');
+                    }
+                    
+                    // Add click event to show events for the day
+                    dayElement.addEventListener('click', () => {
+                        showEventsForDay(currentDay);
+                    });
+                    
+                    calendarGrid.appendChild(dayElement);
+                }
+            }
+            
+            function isToday(date) {
+                const today = new Date();
+                return date.getDate() === today.getDate() &&
+                       date.getMonth() === today.getMonth() &&
+                       date.getFullYear() === today.getFullYear();
+            }
+            
+            function checkForEvents(date) {
+                // Get all events from the event list
+                const events = document.querySelectorAll('.event-item');
+                return Array.from(events).some(event => {
+                    const eventDate = event.querySelector('.event-date');
+                    const day = parseInt(eventDate.querySelector('.day').textContent);
+                    const month = eventDate.querySelector('.month').textContent;
+                    const eventMonth = new Date(`${month} 1, 2024`).getMonth();
+                    return day === date.getDate() && eventMonth === date.getMonth();
+                });
+            }
+            
+            function showEventsForDay(date) {
+                const events = document.querySelectorAll('.event-item');
+                const day = date.getDate();
+                const month = date.toLocaleString('default', { month: 'short' });
+                
+                // Remove any existing highlight
+                events.forEach(event => event.classList.remove('highlighted'));
+                
+                // Highlight events for the selected day
+                events.forEach(event => {
+                    const eventDay = parseInt(event.querySelector('.day').textContent);
+                    const eventMonth = event.querySelector('.month').textContent;
+                    if (eventDay === day && eventMonth === month) {
+                        event.classList.add('highlighted');
+                        event.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            }
+            
+            // Add event listeners for navigation buttons
+            prevButton.addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                updateCalendar(currentDate);
+            });
+            
+            nextButton.addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                updateCalendar(currentDate);
+            });
+            
+            // Initialize calendar
+            updateCalendar(currentDate);
+        });
+    </script>
+</body>
+</html> 

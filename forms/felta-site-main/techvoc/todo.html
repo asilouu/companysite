@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List - Felta Learning Website</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #211954;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffff01;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e1e1e1;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #211954;
+        }
+
+        /* Back button styles */
+        .back-button {
+            position: absolute;
+            top: 5rem; /* Position below header */
+            left: 1rem;
+            background-color: #211954;
+            color: white;
+            border: 2px solid #ffff01;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        .back-button:hover {
+            background-color: #ffff01;
+            color: #211954;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .todo-header {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .todo-header h1 {
+            color: #211954;
+            margin-bottom: 0.5rem;
+        }
+
+        .todo-header p {
+            color: #666;
+        }
+
+        /* Course sections */
+        .course-section {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .course-title {
+            font-size: 1.4rem;
+            color: #211954;
+            font-weight: bold;
+        }
+
+        .course-hours {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Task list */
+        .task-list {
+            list-style: none;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .task-checkbox {
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-title {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+
+        .task-details {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .task-due {
+            font-size: 0.9rem;
+            color: #e74c3c;
+            margin-left: 1rem;
+            white-space: nowrap;
+        }
+
+        .task-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-in-progress {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        /* Progress bar */
+        .progress-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .progress-bar {
+            background-color: #eee;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #2ecc71;
+        }
+
+        .progress-status {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #211954;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: #e1e1e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .task-item {
+                flex-direction: column;
+            }
+
+            .task-due {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+
+            .task-status {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                display: inline-block;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .back-button {
+                top: 4rem; /* Adjust for mobile header height */
+                left: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <a href="javascript:history.back()" class="back-button" title="Go back">←</a>
+
+    <!-- Header with navigation -->
+    <header>
+        <div style="display: flex; align-items: center;">
+            <div class="logo">Felta<span> TechVoc Academy</span></div>
+        </div>
+        <div class="user-menu">
+            <a href="#" class="button">Help</a>
+            <div class="user-avatar">JS</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="todo-header">
+            <h1>To Do List</h1>
+            <p>Track your tasks and assignments across all courses</p>
+        </div>
+
+        <!-- Mobile Robotics Section -->
+        <section class="course-section">
+            <div class="course-header">
+                <div class="course-title">Mobile Robotics</div>
+                <div class="course-hours">156 Hours</div>
+            </div>
+            <ul class="task-list">
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox">
+                    <div class="task-content">
+                        <div class="task-title">Introduction to Robotic Kinematics: Understanding Motion and Control</div>
+                        <div class="task-details">Complete the motion analysis worksheet and submit the control system design</div>
+                    </div>
+                    <div class="task-due">Due Tomorrow, 11:59 PM</div>
+                    <div class="task-status status-pending">Pending</div>
+                </li>
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox">
+                    <div class="task-content">
+                        <div class="task-title">Mobile Robot Navigation Systems</div>
+                        <div class="task-details">Review path planning algorithms and complete the simulation exercise</div>
+                    </div>
+                    <div class="task-due">Due in 3 days</div>
+                    <div class="task-status status-in-progress">In Progress</div>
+                </li>
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox" checked>
+                    <div class="task-content">
+                        <div class="task-title">Basic Robot Programming</div>
+                        <div class="task-details">Complete the programming exercises for basic movement commands</div>
+                    </div>
+                    <div class="task-due">Completed</div>
+                    <div class="task-status status-completed">Completed</div>
+                </li>
+            </ul>
+            <div class="progress-section">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+                <div class="progress-status">
+                    <span>Overall Progress: 75%</span>
+                    <span>Module 6/8</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Robotics Technology II Section -->
+        <section class="course-section">
+            <div class="course-header">
+                <div class="course-title">Robotics Technology II</div>
+            </div>
+            <ul class="task-list">
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox">
+                    <div class="task-content">
+                        <div class="task-title">Advanced Sensor Integration for Autonomous Robotics</div>
+                        <div class="task-details">Complete the sensor calibration lab and submit the integration report</div>
+                    </div>
+                    <div class="task-due">Due in 2 days</div>
+                    <div class="task-status status-pending">Pending</div>
+                </li>
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox">
+                    <div class="task-content">
+                        <div class="task-title">Basic Competencies Assessment</div>
+                        <div class="task-details">Complete the practical assessment for basic robotic operations</div>
+                    </div>
+                    <div class="task-due">Due in 1 week</div>
+                    <div class="task-status status-in-progress">In Progress</div>
+                </li>
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox">
+                    <div class="task-content">
+                        <div class="task-title">Common Competencies Project</div>
+                        <div class="task-details">Work on the team project for robotic system integration</div>
+                    </div>
+                    <div class="task-due">Due in 2 weeks</div>
+                    <div class="task-status status-pending">Pending</div>
+                </li>
+            </ul>
+            <div class="progress-section">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%"></div>
+                </div>
+                <div class="progress-status">
+                    <span>Overall Progress: 60%</span>
+                    <span>Module 3/5</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Felta Learning Management System</p>
+        <ul class="footer-links">
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Contact Support</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for checkboxes
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const taskItem = this.closest('.task-item');
+                    const statusElement = taskItem.querySelector('.task-status');
+                    
+                    if (this.checked) {
+                        statusElement.textContent = 'Completed';
+                        statusElement.className = 'task-status status-completed';
+                        taskItem.querySelector('.task-due').textContent = 'Completed';
+                    } else {
+                        statusElement.textContent = 'Pending';
+                        statusElement.className = 'task-status status-pending';
+                        // You might want to restore the original due date here
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

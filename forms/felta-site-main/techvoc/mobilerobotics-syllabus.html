@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus - Mobile Robotics</title>
+    <style>
+        /* Copy all base styles from rtl2-announcements.html */
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #3361ac;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #3361ac;
+        }
+
+        /* Back button styles */
+        .back-button {
+            position: absolute;
+            top: 5rem;
+            left: 1rem;
+            background-color: #211954;
+            color: white;
+            border: 2px solid #ffff01;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        .back-button:hover {
+            background-color: #ffff01;
+            color: #211954;
+        }
+
+        /* Course header */
+        .course-hero {
+            background-color: #3361ac;
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        .course-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .course-layout {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* Course menu */
+        .course-menu {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .instructor-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .instructor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0c365a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .instructor-details h3 {
+            color: #0c365a;
+            margin-bottom: 0.2rem;
+        }
+
+        .instructor-details p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .menu-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-section h3 {
+            color: #0c365a;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-links {
+            list-style: none;
+        }
+
+        .menu-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .menu-links li a {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .menu-links li a:hover {
+            background-color: rgba(51, 97, 172, 0.1);
+            color: #3361ac;
+        }
+
+        .menu-links li a.active {
+            background-color: #3361ac;
+            color: white;
+        }
+
+        .menu-icon {
+            margin-right: 0.8rem;
+            display: inline-block;
+            width: 1.5rem;
+            text-align: center;
+        }
+
+        /* Course content */
+        .course-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .content-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .content-card h2 {
+            color: #0c365a;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        /* Syllabus styles */
+        .syllabus-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #3361ac;
+        }
+
+        .syllabus-section h3 {
+            color: #3361ac;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .syllabus-section p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .syllabus-section ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .syllabus-section li {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .syllabus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .syllabus-item {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #3361ac;
+        }
+
+        .syllabus-item h4 {
+            color: #0c365a;
+            margin-bottom: 0.5rem;
+        }
+
+        .syllabus-item p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .grading-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        .grading-table th {
+            background-color: rgba(51, 97, 172, 0.1);
+            color: #3361ac;
+            font-weight: 600;
+            text-align: left;
+            padding: 0.75rem 1rem;
+        }
+
+        .grading-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grading-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .syllabus-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #3361ac;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+
+        .syllabus-button:hover {
+            background-color: #2a4f8a;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0c365a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: #e1e1e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .course-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .back-button {
+                top: 4rem;
+                left: 0.5rem;
+            }
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3361ac;
+            margin-bottom: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <a href="mobilerobotics.html" class="back-button" title="Go back">←</a>
+
+    <!-- Header with navigation -->
+    <header>
+        <div style="display: flex; align-items: center;">
+            <a href="learningsite.html" style="text-decoration: none; color: white;">
+                <div class="logo">Felta<span> TechVoc Academy</span></div>
+            </a>
+        </div>
+        <div class="user-menu">
+            <div class="user-avatar">KF</div>
+        </div>
+    </header>
+
+    <!-- Course hero section -->
+    <div class="course-hero">
+        <h1>Syllabus</h1>
+        <p>Mobile Robotics • MROB-101</p>
+    </div>
+
+    <!-- Main content area -->
+    <div class="container">
+        <div class="course-layout">
+            <!-- Course menu sidebar -->
+            <aside class="course-menu">
+                <div class="instructor-info">
+                    <div class="instructor-avatar">AA</div>
+                    <div class="instructor-details">
+                        <h3>Prof. Annalyn Aban</h3>
+                        <p>annalynaban@yahoo.com</p>
+                        <p>Office Hours: TTh 3:00-4:30 PM</p>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <h3>Course Navigation</h3>
+                    <ul class="menu-links">
+                        <li>
+                            <a href="mobilerobotics-announcements.html">
+                                <span class="menu-icon">📢</span>
+                                Announcements
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mobilerobotics-assignments.html">
+                                <span class="menu-icon">📝</span>
+                                Assignments
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mobilerobotics-grades.html">
+                                <span class="menu-icon">📊</span>
+                                Grades
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mobilerobotics-discussions.html">
+                                <span class="menu-icon">💬</span>
+                                Discussions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mobilerobotics-people.html">
+                                <span class="menu-icon">👥</span>
+                                People
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mobilerobotics-syllabus.html" class="active">
+                                <span class="menu-icon">📌</span>
+                                Syllabus
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Syllabus content -->
+            <main class="course-content">
+                <section class="content-card">
+                    <h2>Course Syllabus</h2>
+
+                    <div class="syllabus-section">
+                        <h3>Course Overview</h3>
+                        <p>Mobile Robotics (MROB-101) is an introductory course that covers the fundamental principles and practical applications of mobile robotics. Students will learn about robot navigation, sensor integration, motion planning, and control systems through hands-on projects and laboratory exercises.</p>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Basic Competencies</h3>
+                        <p>Students will develop the following fundamental competencies through practical exercises and hands-on training:</p>
+                        <ul>
+                            <li>Use hand tools for robot assembly and maintenance</li>
+                            <li>Perform mensuration and calculation for robot components and movements</li>
+                            <li>Prepare and interpret technical drawings for robot design and assembly</li>
+                            <li>Apply quality standards in robot construction and testing</li>
+                            <li>Perform computer operations for robot programming and control</li>
+                            <li>Terminate and connect electrical wiring and electronics circuits</li>
+                            <li>Test electronic components for robot systems</li>
+                        </ul>
+                        <div class="sample-tasks">
+                            <h4>Sample Tasks:</h4>
+                            <ul>
+                                <li>Assemble a basic mobile robot chassis using appropriate hand tools</li>
+                                <li>Calculate and verify robot wheel circumference and gear ratios</li>
+                                <li>Create and interpret wiring diagrams for sensor integration</li>
+                                <li>Perform quality checks on assembled robot components</li>
+                                <li>Program basic robot movements using computer software</li>
+                                <li>Connect and test motor drivers and sensors</li>
+                                <li>Verify functionality of electronic components using multimeters</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Course Information</h3>
+                        <div class="syllabus-grid">
+                            <div class="syllabus-item">
+                                <h4>Course Code</h4>
+                                <p>MROB-101</p>
+                            </div>
+                            <div class="syllabus-item">
+                                <h4>Credits</h4>
+                                <p>3 Units</p>
+                            </div>
+                            <div class="syllabus-item">
+                                <h4>Schedule</h4>
+                                <p>Tuesday & Thursday<br>1:00 PM - 3:30 PM</p>
+                            </div>
+                            <div class="syllabus-item">
+                                <h4>Location</h4>
+                                <p>Robotics Lab 3</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Course Objectives</h3>
+                        <p>By the end of this course, students will be able to:</p>
+                        <ul>
+                            <li>Understand fundamental concepts of mobile robotics and autonomous systems</li>
+                            <li>Implement basic navigation algorithms for mobile robots</li>
+                            <li>Integrate and calibrate various sensors for robot perception</li>
+                            <li>Develop and test motion planning strategies</li>
+                            <li>Apply SLAM (Simultaneous Localization and Mapping) techniques</li>
+                            <li>Design and implement control systems for mobile robots</li>
+                            <li>Work effectively in teams on robotics projects</li>
+                        </ul>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Course Modules</h3>
+                        <ul>
+                            <li><strong>Module 1: Basic Competencies</strong>
+                                <ul>
+                                    <li>Participate in Workplace Communication</li>
+                                    <li>Work in a Team Environment</li>
+                                    <li>Solve/Address General Workplace Problems</li>
+                                    <li>Develop Career and Life Decisions</li>
+                                    <li>Contribute to Workplace Innovation</li>
+                                    <li>Present Relevant Information</li>
+                                    <li>Practice Occupational Safety and Health Policies and Procedures</li>
+                                    <li>Exercise Efficient and Effective Sustainable Practices in the Workplace</li>
+                                    <li>Practice Entrepreneurial Skills in the Workplace</li>
+                                </ul>
+                            </li>
+                            <li><strong>Module 2: Common Competencies</strong>
+                                <ul>
+                                    <li>Use of Hand Tools</li>
+                                    <li>Mensuration and Calculation</li>
+                                    <li>Technical Drawing</li>
+                                    <li>Quality Standards</li>
+                                    <li>Computer Operations</li>
+                                    <li>Electrical Wiring</li>
+                                    <li>Electronic Testing</li>
+                                </ul>
+                            </li>
+                            <li><strong>Module 3: Core Competencies</strong>
+                                <ul>
+                                    <li>Install Mobile Robots</li>
+                                    <li>Test Mobile Robotics System</li>
+                                    <li>Service and Maintain Mobile Robot</li>
+                                </ul>
+                            </li>
+                            <li><strong>Module 4: Supervised Industry Learning</strong>
+                                <ul>
+                                    <li>Industry-Based Application of Mobile Robotics Servicing</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Grading System</h3>
+                        <table class="grading-table">
+                            <thead>
+                                <tr>
+                                    <th>Component</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Laboratory Exercises</td>
+                                    <td>25%</td>
+                                </tr>
+                                <tr>
+                                    <td>Projects</td>
+                                    <td>30%</td>
+                                </tr>
+                                <tr>
+                                    <td>Midterm Examination</td>
+                                    <td>20%</td>
+                                </tr>
+                                <tr>
+                                    <td>Final Examination</td>
+                                    <td>15%</td>
+                                </tr>
+                                <tr>
+                                    <td>Class Participation</td>
+                                    <td>10%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Required Materials</h3>
+                        <ul>
+                            <li>Textbook: "Introduction to Autonomous Mobile Robots" by Roland Siegwart</li>
+                            <li>Laptop with minimum specifications:
+                                <ul>
+                                    <li>Intel i5 processor or equivalent</li>
+                                    <li>8GB RAM minimum</li>
+                                    <li>Ubuntu 20.04 LTS or Windows 10</li>
+                                </ul>
+                            </li>
+                            <li>Required Software:
+                                <ul>
+                                    <li>ROS (Robot Operating System)</li>
+                                    <li>Python 3.8+</li>
+                                    <li>Git</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Course Policies</h3>
+                        <ul>
+                            <li>Attendance is mandatory for all laboratory sessions</li>
+                            <li>Late submissions will be accepted with a 10% deduction per day</li>
+                            <li>Academic integrity is strictly enforced</li>
+                            <li>All projects must be completed individually unless specified as group work</li>
+                            <li>Lab safety protocols must be followed at all times</li>
+                        </ul>
+                    </div>
+
+                    <a href="#" class="syllabus-button">Download Full Syllabus (PDF)</a>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Felta TechVoc Academy Learning Management System</p>
+        <ul class="footer-links">
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Contact Support</a></li>
+        </ul>
+    </footer>
+</body>
+</html> 

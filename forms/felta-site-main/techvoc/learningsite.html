@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felta Learning Website</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #211954;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffff01;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e1e1e1;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #211954;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 1.2rem;
+            color: #211954;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu li a {
+            text-decoration: none;
+            color: #555;
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .sidebar-menu li a i {
+            margin-right: 12px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+            color: #211954;
+        }
+
+        .sidebar-menu li a:hover {
+            background-color: #f8f9fa;
+            color: #211954;
+            transform: translateX(5px);
+        }
+
+        .sidebar-menu li a.active {
+            background-color: #211954;
+            color: white;
+        }
+
+        .sidebar-menu li a.active i {
+            color: #ffff01;
+        }
+
+        /* Course menu styles */
+        .course-menu {
+            margin-top: 1.5rem;
+        }
+
+        .course-menu li a {
+            padding-left: 1rem;
+            font-size: 1rem;
+        }
+
+        .course-menu .course-toggle {
+            position: relative;
+        }
+
+        .course-menu .course-toggle::after {
+            display: none;
+        }
+
+        .subcourses {
+            margin-top: 0.5rem;
+            margin-left: 0;
+            display: none;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 0.5rem;
+            list-style: none;
+        }
+
+        .subcourses li {
+            list-style: none;
+        }
+
+        .course-toggle.active + .subcourses {
+            display: block;
+        }
+
+        .subcourses li a {
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .subcourses li a:hover {
+            background-color: #eef0f2;
+        }
+
+        /* Main content area */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .welcome-banner {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .welcome-banner h1 {
+            color: #211954;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-banner p {
+            color: #555;
+        }
+
+        /* Announcement styles */
+        .announcement-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .announcement-card h2 {
+            color: #211954;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .announcement {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .announcement:last-child {
+            border-bottom: none;
+        }
+
+        .announcement-title {
+            font-weight: 600;
+            color: #211954;
+            margin-bottom: 0.3rem;
+        }
+
+        .announcement-meta {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .announcement-content {
+            color: #555;
+        }
+
+        /* Course cards */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .course-card {
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-header {
+            height: 100px;
+            background-color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .robotics1-course {
+            background-color: #3361ac;
+        }
+
+        .robotics2-course {
+            background-color: #e8af30;
+        }
+
+        .robotics3-course {
+            background-color: #9b59b6;
+        }
+
+        .robotics4-course {
+            background-color: #f39c12;
+        }
+
+        .course-content {
+            padding: 1.2rem;
+        }
+
+        .course-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #211954;
+        }
+
+        .course-details {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-progress {
+            margin-top: 1rem;
+        }
+
+        .progress-bar {
+            background-color: #eee;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #2ecc71; /* Default color */
+        }
+
+        /* Course-specific progress bar colors */
+        .course-card .robotics1-course ~ .course-content .progress-fill {
+            background-color: #3361ac;
+        }
+
+        .course-card .robotics2-course ~ .course-content .progress-fill {
+            background-color: #e8af30;
+        }
+
+        .course-card .robotics3-course ~ .course-content .progress-fill {
+            background-color: #9b59b6;
+        }
+
+        .course-card .robotics4-course ~ .course-content .progress-fill {
+            background-color: #f39c12;
+        }
+
+        .progress-status {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            color: #777;
+        }
+
+        /* Robotics course subcourses */
+        .subcourse-list {
+            margin-top: 1.2rem;
+            border-top: 1px dashed #ddd;
+            padding-top: 1rem;
+        }
+
+        .subcourse-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+
+        .subcourse-item:last-child {
+            border-bottom: none;
+        }
+
+        .subcourse-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .robotics1-course ~ .course-content .subcourse-icon {
+            background-color: #3361ac;
+        }
+
+        .robotics2-course ~ .course-content .subcourse-icon {
+            background-color: #e8af30;
+        }
+
+        .robotics3-course ~ .course-content .subcourse-icon {
+            background-color: #9b59b6;
+        }
+
+        .robotics4-course ~ .course-content .subcourse-icon {
+            background-color: #f39c12;
+        }
+
+        .subcourse-info {
+            flex: 1;
+        }
+
+        .subcourse-title {
+            font-weight: 500;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .subcourse-progress {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        /* Upcoming assignments section */
+        .upcoming-section {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .upcoming-section h2 {
+            color: #211954;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .assignments-list {
+            list-style: none;
+        }
+
+        .assignment-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .assignment-item:last-child {
+            border-bottom: none;
+        }
+
+        .assignment-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .assignment-title {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .assignment-course {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .assignment-due {
+            font-size: 0.9rem;
+            color: #e74c3c;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #211954;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0a2846;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #211954;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: #e1e1e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .courses-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                margin-left: 0;
+                margin-right: 1rem;
+            }
+
+            .user-menu {
+                margin-top: 1rem;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with navigation -->
+    <header>
+        <div class="logo">Felta<span> TechVoc Academy</span></div>
+        <div class="user-menu">
+            <div class="user-avatar">KF</div>
+        </div>
+    </header>
+
+    <!-- Main content area -->
+    <div class="container">
+        <div class="dashboard">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h2>Quick Links</h2>
+                <div class="sidebar-menu">
+                    <ul>
+                        <li><a href="learningsite.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                        <li><a href="todo.html"><i class="fas fa-tasks"></i> To Do</a></li>
+                        <li><a href="upcoming.html"><i class="fas fa-calendar"></i> Upcoming</a></li>
+                        <li><a href="grades.html"><i class="fas fa-graduation-cap"></i> Grades</a></li>
+                        <li><a href="inbox.html"><i class="fas fa-inbox"></i> Inbox</a></li>
+                        <li><a href="files.html"><i class="fas fa-file"></i> Files</a></li>
+                    </ul>
+                </div>
+
+                <h2>My Courses</h2>
+                <ul class="sidebar-menu course-menu">
+                    <li>
+                        <a href="#" class="course-toggle" onclick="this.classList.toggle('active')">
+                            <i class="fas fa-robot"></i> Mobile Robotics
+                        </a>
+                        <ul class="subcourses">
+                            <li><a href="#"><i class="fas fa-book"></i> Module 1</a></li>
+                            <li><a href="#"><i class="fas fa-book"></i> Module 2</a></li>
+                            <li><a href="#"><i class="fas fa-book"></i> Module 3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="rtl2.html">
+                            <i class="fas fa-microchip"></i> Robotics Technology II
+                        </a>
+                        <ul class="subcourses">
+                            <li><a href="#"><i class="fas fa-book"></i> Basic Competencies</a></li>
+                            <li><a href="#"><i class="fas fa-book"></i> Common Competencies</a></li>
+                            <li><a href="#"><i class="fas fa-book"></i> Core Competencies</a></li>
+                            <li><a href="#"><i class="fas fa-book"></i> Industry Learning</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Main content -->
+            <main class="main-content">
+                <section class="welcome-banner">
+                    <h1>Welcome back, student!</h1>
+                    <p>You have 3 assignments due this week. See your upcoming tasks below.</p>
+                </section>
+
+                <!-- Announcements section -->
+                <section class="announcement-card">
+                    <h2>Announcements</h2>
+                    <div class="announcement">
+                        <h3 class="announcement-title">Robot Arm Kinematics Project Due</h3>
+                        <div class="announcement-meta">Posted by Prof. Annalyn Aban • Robotics Technology II • March 10, 2025</div>
+                        <div class="announcement-content">
+                            <p>Just a reminder that the Robot Arm Kinematics Project is due in 2 days. Please make sure to submit your project report and code files by the deadline. If you have any questions, feel free to post them in the discussion forum or email me directly.</p>
+                        </div>
+                    </div>
+                    <div class="announcement">
+                        <h3 class="announcement-title">Industry Partner Visit Next Week</h3>
+                        <div class="announcement-meta">Posted by Prof. Annalyn Aban • Robotics Technology II • March 5, 2025</div>
+                        <div class="announcement-content">
+                            <p>We will have representatives from TechRobotics Inc. visiting our class next Tuesday. They will be presenting career opportunities and discussing potential supervised industry learning placements. Attendance is highly recommended!</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Courses grid -->
+                <div class="courses-grid">
+                    <div class="course-card">
+                        <a href="mobilerobotics.html" style="text-decoration: none; color: inherit; display: block;">
+                            <div class="course-header robotics1-course">Mobile Robotics</div>
+                            <div class="course-content">
+                                <h3 class="course-title">Mobile Robotics</h3>
+                                <p class="course-details">MWF 10:00 AM • 156 Hours</p>
+                                <div class="course-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 45%"></div>
+                                    </div>
+                                    <div class="progress-status">
+                                        <span>Progress: 45%</span>
+                                        <span>Module 3/8</span>
+                                    </div>
+                                </div>
+
+                                <!-- Subcourses for Mobile Robotics -->
+                                <div class="subcourse-list">
+                                    <div class="subcourse-item">
+                                        <div class="subcourse-icon">1</div>
+                                        <div class="subcourse-info">
+                                            <div class="subcourse-title">Basic Competencies</div>
+                                            <div class="subcourse-progress">Progress: 95%</div>
+                                        </div>
+                                    </div>
+                                    <div class="subcourse-item">
+                                        <div class="subcourse-icon">2</div>
+                                        <div class="subcourse-info">
+                                            <div class="subcourse-title">Common Competencies</div>
+                                            <div class="subcourse-progress">Progress: 85%</div>
+                                        </div>
+                                    </div>
+                                    <div class="subcourse-item">
+                                        <div class="subcourse-icon">3</div>
+                                        <div class="subcourse-info">
+                                            <div class="subcourse-title">Core Competencies</div>
+                                            <div class="subcourse-progress">Progress: 25%</div>
+                                        </div>
+                                    </div>
+                                    <div class="subcourse-item">
+                                        <div class="subcourse-icon">4</div>
+                                        <div class="subcourse-info">
+                                            <div class="subcourse-title">Supervised Industry Learning</div>
+                                            <div class="subcourse-progress">Progress: 5%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="course-card">
+                        <a href="rtl2.html" style="text-decoration: none; color: inherit; display: block;">
+                            <div class="course-header robotics2-course">Robotics Technology II</div>
+                            <div class="course-content">
+                                <h3 class="course-title">Robotics Technology II</h3>
+                                <p class="course-details">TTh 1:30 PM</p>
+                                <div class="course-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 60%"></div>
+                                    </div>
+                                    <div class="progress-status">
+                                        <span>Progress: 60%</span>
+                                        <span>Module 3/5</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Subcourses for Robotics -->
+                                <div class="subcourse-list">
+                                    <div class="subcourse-item">
+                                        <div class="subcourse-icon">1</div>
+                                        <div class="subcourse-info">
+                                            <div class="subcourse-title">Basic Competencies</div>
+                                            <div class="subcourse-progress">Progress: 85%</div>
+                                        </div>
+                                    </div>
+                                    <div class="subcourse-item">
+                                        <div class="subcourse-icon">2</div>
+                                        <div class="subcourse-info">
+                                            <div class="subcourse-title">Common Competencies</div>
+                                            <div class="subcourse-progress">Progress: 75%</div>
+                                        </div>
+                                    </div>
+                                    <div class="subcourse-item">
+                                        <div class="subcourse-icon">3</div>
+                                        <div class="subcourse-info">
+                                            <div class="subcourse-title">Core Competencies</div>
+                                            <div class="subcourse-progress">Progress: 45%</div>
+                                        </div>
+                                    </div>
+                                    <div class="subcourse-item">
+                                        <div class="subcourse-icon">4</div>
+                                        <div class="subcourse-info">
+                                            <div class="subcourse-title">Supervised Industry Learning</div>
+                                            <div class="subcourse-progress">Progress: 20%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Upcoming assignments -->
+                <section class="upcoming-section">
+                    <h2>Upcoming Assignments</h2>
+                    <ul class="assignments-list">
+                        <li class="assignment-item">
+                            <div class="assignment-info">
+                                <span class="assignment-title">Introduction to Robotic Kinematics: Understanding Motion and Control</span>
+                                <span class="assignment-course">Mobile Robotics</span>
+                            </div>
+                            <div class="assignment-due">Due Tomorrow, 11:59 PM</div>
+                        </li>
+                        <li class="assignment-item">
+                            <div class="assignment-info">
+                                <span class="assignment-title">Advanced Sensor Integration for Autonomous Robotics</span>
+                                <span class="assignment-course">Robotics Technology II</span>
+                            </div>
+                            <div class="assignment-due">Due in 2 days</div>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Felta Learning Management System</p>
+        <ul class="footer-links">
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Contact Support</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        // Simple JavaScript to make the sidebar course expandable
+        document.addEventListener('DOMContentLoaded', function() {
+            const courseToggles = document.querySelectorAll('.course-toggle');
+            courseToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

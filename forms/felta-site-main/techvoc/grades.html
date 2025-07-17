@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grades - Felta Learning Website</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #211954;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffff01;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e1e1e1;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #211954;
+        }
+
+        /* Back button styles */
+        .back-button {
+            position: absolute;
+            top: 5rem; /* Position below header */
+            left: 1rem;
+            background-color: #211954;
+            color: white;
+            border: 2px solid #ffff01;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        .back-button:hover {
+            background-color: #ffff01;
+            color: #211954;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .grades-header {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .grades-header h1 {
+            color: #211954;
+            margin-bottom: 0.5rem;
+        }
+
+        .grades-header p {
+            color: #666;
+        }
+
+        /* Course grades section */
+        .course-section {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .course-title {
+            font-size: 1.4rem;
+            color: #211954;
+            font-weight: bold;
+        }
+
+        .course-hours {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Grade summary */
+        .grade-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .grade-card {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .grade-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .grade-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #211954;
+        }
+
+        .grade-trend {
+            font-size: 0.8rem;
+            color: #28a745;
+            margin-top: 0.5rem;
+        }
+
+        .grade-trend.down {
+            color: #dc3545;
+        }
+
+        /* Grade table */
+        .grade-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .grade-table th,
+        .grade-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grade-table th {
+            background-color: #f8f9fa;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .grade-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .grade-score {
+            font-weight: 500;
+        }
+
+        .grade-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-late {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Progress section */
+        .progress-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .progress-title {
+            font-size: 1.1rem;
+            color: #211954;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background-color: #eee;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #2ecc71;
+        }
+
+        .progress-status {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #211954;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: #e1e1e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .grade-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .grade-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .back-button {
+                top: 4rem; /* Adjust for mobile header height */
+                left: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <a href="javascript:history.back()" class="back-button" title="Go back">←</a>
+
+    <!-- Header with navigation -->
+    <header>
+        <div style="display: flex; align-items: center;">
+            <div class="logo">Felta<span> TechVoc Academy</span></div>
+        </div>
+        <div class="user-menu">
+            <div class="user-avatar">JS</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="grades-header">
+            <h1>Grades</h1>
+            <p>View your grades and academic progress</p>
+        </div>
+
+        <!-- Mobile Robotics Section -->
+        <section class="course-section">
+            <div class="course-header">
+                <div class="course-title">Mobile Robotics</div>
+                <div class="course-hours">156 Hours</div>
+            </div>
+
+            <div class="grade-summary">
+                <div class="grade-card">
+                    <div class="grade-label">Current Grade</div>
+                    <div class="grade-value">88%</div>
+                    <div class="grade-trend">↑ 2% from last week</div>
+                </div>
+                <div class="grade-card">
+                    <div class="grade-label">Assignments Completed</div>
+                    <div class="grade-value">6/8</div>
+                    <div class="grade-trend">75% completion rate</div>
+                </div>
+                <div class="grade-card">
+                    <div class="grade-label">Lab Performance</div>
+                    <div class="grade-value">92%</div>
+                    <div class="grade-trend">↑ 5% from last month</div>
+                </div>
+            </div>
+
+            <table class="grade-table">
+                <thead>
+                    <tr>
+                        <th>Assignment</th>
+                        <th>Due Date</th>
+                        <th>Score</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Basic Robot Programming</td>
+                        <td>Mar 15, 2024</td>
+                        <td class="grade-score">95%</td>
+                        <td><span class="grade-status status-completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Motion Analysis Worksheet</td>
+                        <td>Mar 20, 2024</td>
+                        <td class="grade-score">85%</td>
+                        <td><span class="grade-status status-completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Control System Design</td>
+                        <td>Mar 22, 2024</td>
+                        <td class="grade-score">90%</td>
+                        <td><span class="grade-status status-completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Introduction to Robotic Kinematics</td>
+                        <td>Mar 27, 2024</td>
+                        <td class="grade-score">-</td>
+                        <td><span class="grade-status status-pending">Pending</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="progress-section">
+                <h3 class="progress-title">Course Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+                <div class="progress-status">
+                    <span>Overall Progress: 75%</span>
+                    <span>Module 6/8</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Robotics Technology II Section -->
+        <section class="course-section">
+            <div class="course-header">
+                <div class="course-title">Robotics Technology II</div>
+            </div>
+
+            <div class="grade-summary">
+                <div class="grade-card">
+                    <div class="grade-label">Current Grade</div>
+                    <div class="grade-value">82%</div>
+                    <div class="grade-trend">↑ 3% from last week</div>
+                </div>
+                <div class="grade-card">
+                    <div class="grade-label">Assignments Completed</div>
+                    <div class="grade-value">3/5</div>
+                    <div class="grade-trend">60% completion rate</div>
+                </div>
+                <div class="grade-card">
+                    <div class="grade-label">Practical Skills</div>
+                    <div class="grade-value">85%</div>
+                    <div class="grade-trend">↑ 2% from last month</div>
+                </div>
+            </div>
+
+            <table class="grade-table">
+                <thead>
+                    <tr>
+                        <th>Assignment</th>
+                        <th>Due Date</th>
+                        <th>Score</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Basic Competencies Assessment</td>
+                        <td>Mar 10, 2024</td>
+                        <td class="grade-score">88%</td>
+                        <td><span class="grade-status status-completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Common Competencies Project</td>
+                        <td>Mar 18, 2024</td>
+                        <td class="grade-score">75%</td>
+                        <td><span class="grade-status status-completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Core Competencies Lab</td>
+                        <td>Mar 25, 2024</td>
+                        <td class="grade-score">83%</td>
+                        <td><span class="grade-status status-completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Advanced Sensor Integration</td>
+                        <td>Mar 29, 2024</td>
+                        <td class="grade-score">-</td>
+                        <td><span class="grade-status status-pending">Pending</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="progress-section">
+                <h3 class="progress-title">Course Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%"></div>
+                </div>
+                <div class="progress-status">
+                    <span>Overall Progress: 60%</span>
+                    <span>Module 3/5</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Felta Learning Management System</p>
+        <ul class="footer-links">
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Contact Support</a></li>
+        </ul>
+    </footer>
+</body>
+</html> 

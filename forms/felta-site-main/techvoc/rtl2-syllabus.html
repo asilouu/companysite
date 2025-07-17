@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus - Robotics Technology Level II</title>
+    <style>
+        /* Copy all base styles from rtl2-announcements.html */
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #211954;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ffff01;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #211954;
+        }
+
+        /* Back button styles */
+        .back-button {
+            position: absolute;
+            top: 5rem;
+            left: 1rem;
+            background-color: #211954;
+            color: white;
+            border: 2px solid #ffff01;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        .back-button:hover {
+            background-color: #ffff01;
+            color: #211954;
+        }
+
+        /* Course header */
+        .course-hero {
+            background-color: #e8af30;
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        .course-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .course-layout {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* Course menu */
+        .course-menu {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .instructor-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .instructor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0c365a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .instructor-details h3 {
+            color: #0c365a;
+            margin-bottom: 0.2rem;
+        }
+
+        .instructor-details p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .menu-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-section h3 {
+            color: #0c365a;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-links {
+            list-style: none;
+        }
+
+        .menu-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .menu-links li a {
+            text-decoration: none;
+            color: #555;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .menu-links li a:hover {
+            color: #e8c766;
+        }
+
+        .menu-icon {
+            margin-right: 0.8rem;
+            display: inline-block;
+            width: 1.5rem;
+            text-align: center;
+        }
+
+        /* Content card styles */
+        .content-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-card h2 {
+            color: #0c365a;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        /* Syllabus styles */
+        .syllabus-section {
+            margin-bottom: 2rem;
+        }
+
+        .syllabus-section h3 {
+            color: #0c365a;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .syllabus-section p {
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        .syllabus-section ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .syllabus-section li {
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+
+        .course-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .info-card h4 {
+            color: #0c365a;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #0c365a;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .schedule-table th {
+            background-color: #e3f2fd;
+            color: #4a90e2;
+            font-weight: 600;
+        }
+
+        .schedule-table tr:hover {
+            background-color: #fff3e0;
+        }
+
+        .policy-list {
+            list-style: none;
+        }
+
+        .policy-list li {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .policy-list li::before {
+            content: "•";
+            color: #e8c766;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -0.2rem;
+        }
+
+        .policy-list h4 {
+            color: #0c365a;
+            margin-bottom: 0.5rem;
+        }
+
+        .policy-list p {
+            color: #444;
+            margin-bottom: 0.5rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #e8c766;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .download-btn:hover {
+            background-color: #d4b555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0c365a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: #e1e1e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .course-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .course-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .back-button {
+                top: 4rem;
+                left: 0.5rem;
+            }
+
+            .schedule-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        .syllabus-section h2 {
+            color: #211954;
+            border-bottom: 2px solid #e8c766;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .grading-scale tr:nth-child(even) {
+            background-color: #e3f2fd;
+        }
+
+        .grading-scale tr:hover {
+            background-color: #fff3e0;
+        }
+
+        .policy-item h4 {
+            color: #211954;
+            margin-bottom: 0.5rem;
+        }
+
+        .policy-item p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .policy-item:last-child p {
+            margin-bottom: 0;
+        }
+
+        .policy-item:hover {
+            background-color: #fff3e0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <a href="rtl2.html" class="back-button" title="Go back">←</a>
+
+    <!-- Header with navigation -->
+    <header>
+        <div style="display: flex; align-items: center;">
+            <div class="logo">Felta<span> TechVoc Academy</span></div>
+        </div>
+        <div class="user-menu">
+            <div class="user-avatar">JS</div>
+        </div>
+    </header>
+
+    <!-- Course hero section -->
+    <div class="course-hero">
+        <h1>Syllabus</h1>
+        <p>Robotics Technology Level II • RTL-102</p>
+    </div>
+
+    <!-- Main content area -->
+    <div class="container">
+        <div class="course-layout">
+            <!-- Course menu sidebar -->
+            <aside class="course-menu">
+                <div class="instructor-info">
+                    <div class="instructor-avatar">AA</div>
+                    <div class="instructor-details">
+                        <h3>Prof. Annalyn Aban</h3>
+                        <p>annalynaban@yahoo.com</p>
+                        <p>Office Hours: TTh 3:00-4:30 PM</p>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <h3>Course Navigation</h3>
+                    <ul class="menu-links">
+                        <li>
+                            <a href="rtl2-announcements.html">
+                                <span class="menu-icon">📢</span>
+                                Announcements
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-assignments.html">
+                                <span class="menu-icon">📝</span>
+                                Assignments
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-grades.html">
+                                <span class="menu-icon">📊</span>
+                                Grades
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-discussions.html">
+                                <span class="menu-icon">💬</span>
+                                Discussions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-people.html">
+                                <span class="menu-icon">👥</span>
+                                People
+                            </a>
+                        </li>
+                        <li>
+                            <a href="rtl2-syllabus.html" class="active">
+                                <span class="menu-icon">📌</span>
+                                Syllabus
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Syllabus content -->
+            <main class="course-content">
+                <section class="content-card">
+                    <div class="syllabus-section">
+                        <h2>Course Syllabus</h2>
+                        <a href="#" class="download-btn">📥 Download PDF Version</a>
+                    </div>
+
+                    <div class="course-info-grid">
+                        <div class="info-card">
+                            <h4>Course Information</h4>
+                            <ul class="info-list">
+                                <li>
+                                    <span class="info-label">Course Code:</span>
+                                    <span class="info-value">RTL-102</span>
+                                </li>
+                                <li>
+                                    <span class="info-label">Course Title:</span>
+                                    <span class="info-value">Robotics Technology Level II</span>
+                                </li>
+                                <li>
+                                    <span class="info-label">Credits:</span>
+                                    <span class="info-value">3 Units</span>
+                                </li>
+                                <li>
+                                    <span class="info-label">Prerequisites:</span>
+                                    <span class="info-value">RTL-101</span>
+                                </li>
+                                <li>
+                                    <span class="info-label">Term:</span>
+                                    <span class="info-value">Spring 2025</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Schedule</h4>
+                            <ul class="info-list">
+                                <li>
+                                    <span class="info-label">Lecture:</span>
+                                    <span class="info-value">MWF 9:00-10:30 AM</span>
+                                </li>
+                                <li>
+                                    <span class="info-label">Lab:</span>
+                                    <span class="info-value">TTh 1:00-4:00 PM</span>
+                                </li>
+                                <li>
+                                    <span class="info-label">Location:</span>
+                                    <span class="info-value">Room 302, Robotics Lab</span>
+                                </li>
+                                <li>
+                                    <span class="info-label">Office Hours:</span>
+                                    <span class="info-value">TTh 3:00-4:30 PM</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Course Description</h3>
+                        <p>This course builds upon the foundational knowledge acquired in Robotics Technology Level I, focusing on advanced robotics concepts, industrial applications, and hands-on project development. Students will engage in practical exercises, industry-standard simulations, and real-world robotics projects.</p>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Learning Outcomes</h3>
+                        <p>By the end of this course, students will be able to:</p>
+                        <ul>
+                            <li>Design and implement complex robotic systems using industry-standard tools and methodologies</li>
+                            <li>Apply advanced kinematics and control systems in robotics applications</li>
+                            <li>Develop and troubleshoot robotic programs for industrial automation</li>
+                            <li>Collaborate effectively in team-based robotics projects</li>
+                            <li>Demonstrate professional competence in robotics safety and maintenance</li>
+                            <li>Integrate robotics systems with other industrial automation technologies</li>
+                        </ul>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Course Schedule</h3>
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Week</th>
+                                    <th>Topic</th>
+                                    <th>Activities</th>
+                                    <th>Due Dates</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1-2</td>
+                                    <td>Advanced Robot Kinematics</td>
+                                    <td>Lectures, Lab Exercises</td>
+                                    <td>Lab Safety Certification</td>
+                                </tr>
+                                <tr>
+                                    <td>3-4</td>
+                                    <td>Industrial Robotics Applications</td>
+                                    <td>Project Work, Industry Visit</td>
+                                    <td>Robot Arm Project</td>
+                                </tr>
+                                <tr>
+                                    <td>5-6</td>
+                                    <td>Control Systems & Programming</td>
+                                    <td>Lab Sessions, Workshops</td>
+                                    <td>Midterm Exam</td>
+                                </tr>
+                                <tr>
+                                    <td>7-8</td>
+                                    <td>System Integration</td>
+                                    <td>Team Projects, Simulations</td>
+                                    <td>Final Project</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Grading Policy</h3>
+                        <ul class="policy-list">
+                            <li>
+                                <h4>Assessment Components</h4>
+                                <p>Lab Safety Certification (10%)</p>
+                                <p>Robot Arm Kinematics Project (25%)</p>
+                                <p>Core Competencies Midterm (25%)</p>
+                                <p>Final Project (30%)</p>
+                                <p>Participation & Attendance (10%)</p>
+                            </li>
+                            <li>
+                                <h4>Grading Scale</h4>
+                                <p>A: 90-100% | B: 80-89% | C: 70-79% | D: 60-69% | F: Below 60%</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Course Policies</h3>
+                        <ul class="policy-list">
+                            <li>
+                                <h4>Attendance</h4>
+                                <p>Regular attendance is mandatory. More than three unexcused absences may result in course failure. Lab sessions cannot be made up.</p>
+                            </li>
+                            <li>
+                                <h4>Late Work</h4>
+                                <p>Assignments submitted after the due date will receive a 10% deduction per day, up to three days. No submissions accepted after three days.</p>
+                            </li>
+                            <li>
+                                <h4>Academic Integrity</h4>
+                                <p>All work must be original. Plagiarism or cheating will result in immediate course failure and disciplinary action.</p>
+                            </li>
+                            <li>
+                                <h4>Lab Safety</h4>
+                                <p>Strict adherence to safety protocols is required. Failure to follow safety guidelines will result in immediate removal from the lab.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="syllabus-section">
+                        <h3>Required Materials</h3>
+                        <ul>
+                            <li>Textbook: "Advanced Robotics: Principles and Applications" (2024 Edition)</li>
+                            <li>Lab Manual: "Robotics Technology II Laboratory Guide"</li>
+                            <li>Safety Equipment: Lab coat, safety glasses, and closed-toe shoes</li>
+                            <li>Software: Robotics Simulation Suite (provided by the institution)</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Felta TechVoc Academy Learning Management System</p>
+        <ul class="footer-links">
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Contact Support</a></li>
+        </ul>
+    </footer>
+</body>
+</html> 
